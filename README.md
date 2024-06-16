@@ -2,7 +2,7 @@
 
 Jenkins를 설치하고 github를 사용하여 CI/CD pipeline을 구축한다.
 
-# 시스템구성
+## 시스템구성
 
 - VM
   - ubuntu-live-server-22.04
@@ -12,7 +12,7 @@ Jenkins를 설치하고 github를 사용하여 CI/CD pipeline을 구축한다.
 
 > Jenkins 최소권장사양인 4GB RAM을 할당한다
 
-# 사전 준비
+## 사전 준비
 
 ### JAVA
 
@@ -21,13 +21,13 @@ sudo apt update
 sudo apt install fontconfig openjdk-17-jre
 ```
 
-## Jenkins
+### Jenkins
 
 [공식홈페이지의 문서](https://www.jenkins.io/doc/book/installing/linux/#debianubuntu)를 참고하여 설치를 진행한다.
 
 > Jenkins 2.452.2(2024.06.14)버전으로 진행
 
-### Jenkins LTS release
+#### Jenkins LTS release
 
 ```sh
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
@@ -39,7 +39,7 @@ sudo apt-get update
 sudo apt-get install jenkins
 ```
 
-### 설치 확인 및 실행
+#### 설치 확인 및 실행
 
 ```sh
 sudo systemctl enable jenkins
@@ -53,7 +53,7 @@ sudo systemctl status jenkins
 
 default plugin을 설치하며 초기 세팅을 마무리한다.
 
-## docker
+### docker
 
 dockerfile을 통해 build 하기 위해서 docker를 설치한다.
 
@@ -79,7 +79,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-## github ssh
+### github ssh
 
 jenkins가 github에서 pull할 수 있도록 Credential을 추가한다.
 
@@ -95,7 +95,8 @@ public key를 github의 `사용자` > `Settings` > `SSH and GPG keys`에 등록�
 
 ![github ssh key 등록](./github_ssh_key.jpg)
 
-> 각 repository 별로 `repository` > `Settings` > `Deploy keys` 에 등록하여 사용하여도 된다. ![[Screenshot 2024-06-15 at 15.26.10.png]]
+> 각 repository 별로 `repository` > `Settings` > `Deploy keys` 에 등록하여 사용하여도 된다.
+> ![deploy_key](./deploy_key.png)
 
 private key를 Jenkins의 `Jenkins 관리` > `Credentials` > `System (global)` > `Add Credentials`로 추가한다.
 
@@ -109,7 +110,10 @@ github와 jenkins를 연동하기 위하여 간단한 [nodejs 웹서버 서비�
 
 # 구성 시작
 
-- kubernetes에 Jenkins 구성
-- [Github -> Jenkins -> private repository](https://github.com/McNal1828/Jenkins-practice/tree/main/private-repository)
-- Github -> Jenkins -> ECR
-- Github -> Jenkins -> ECR(Github Action)
+- [kubernetes에 Jenkins 구성](https://github.com/McNal1828/Jenkins-practice/tree/master/Jenkins-k8s)
+- [Github -> Jenkins -> private repository](https://github.com/McNal1828/Jenkins-practice/tree/master/private-repository)
+- [Github -> Jenkins -> ECR](https://github.com/McNal1828/Jenkins-practice/tree/master/ECR-repository)
+- [Github -> ECR(Github Action)](https://github.com/McNal1828/Jenkins-practice/tree/master/GithubAction)
+- [kustomize](https://github.com/McNal1828/Jenkins-practice/tree/master/kustomize)
+- [Argo CD 구성](https://github.com/McNal1828/Jenkins-practice/tree/master/ArgoCD)
+- [EKS에 Jenkins 구성]()
